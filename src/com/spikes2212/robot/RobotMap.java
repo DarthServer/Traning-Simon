@@ -6,11 +6,6 @@ package com.spikes2212.robot;
 
 public class RobotMap {
     public static interface PWM {
-        // driving system motors
-        public static final int LEFT_MOTOR_1  = 1;
-        public static final int RIGHT_MOTOR_1 = 2;
-        public static final int LEFT_MOTOR_2 = 3;
-        public static final int RIGHT_MOTOR_2 = 4;
 
         // crane motor
         public static final int CRAIN_MOTOR = 2;
@@ -21,6 +16,15 @@ public class RobotMap {
         // shooter
 
         public static final int SHOOTER_MOTOR = 7;
+    }
+
+    public static interface CAN {
+        // driving system motors
+        public static final int LEFT_MOTOR_1  = 4;
+        public static final int RIGHT_MOTOR_1 = 6;
+        public static final int LEFT_MOTOR_2 = 5;
+        public static final int RIGHT_MOTOR_2 = 1;
+
     }
 
     public static interface DIO {

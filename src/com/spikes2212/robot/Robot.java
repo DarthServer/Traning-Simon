@@ -1,6 +1,7 @@
 package com.spikes2212.robot;
 
 
+import com.ctre.CANTalon;
 import com.spikes2212.robot.commands.autonomous.MoveCollectBallsAndShoot;
 import com.spikes2212.robot.components.MotorGroup;
 import com.spikes2212.robot.subsystems.Crane;
@@ -41,7 +42,10 @@ public class Robot extends IterativeRobot {
 
         autonomousCommand = new MoveCollectBallsAndShoot();
 
-        drivetrain = new Drivetrain(new MotorGroup(), new MotorGroup());
+        drivetrain = new Drivetrain(new MotorGroup(new CANTalon(RobotMap.CAN.LEFT_MOTOR_1),
+                new CANTalon(RobotMap.CAN.LEFT_MOTOR_2)),
+                new MotorGroup(new CANTalon(RobotMap.CAN.RIGHT_MOTOR_1),
+                        new CANTalon(RobotMap.CAN.RIGHT_MOTOR_2)));
 
         oi = new OI();
 
