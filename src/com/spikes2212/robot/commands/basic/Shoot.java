@@ -10,6 +10,13 @@ public class Shoot extends Command {
     public Shoot(double speed) {
         requires(Robot.shooter);
         this.speed = speed;
+
+    }
+
+    public Shoot(double speed, double timeout) {
+        this(speed);
+
+        setTimeout(timeout);
     }
 
     @Override
