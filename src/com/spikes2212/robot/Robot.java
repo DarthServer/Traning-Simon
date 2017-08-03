@@ -2,6 +2,7 @@ package com.spikes2212.robot;
 
 import com.ctre.CANTalon;
 import com.spikes2212.robot.commands.autonomous.MoveCollectBallsAndShoot;
+import com.spikes2212.robot.commands.basic.Shoot;
 import com.spikes2212.robot.components.MotorGroup;
 import com.spikes2212.robot.subsystems.Crane;
 import com.spikes2212.robot.subsystems.Drivetrain;
@@ -40,8 +41,16 @@ public class Robot extends IterativeRobot {
 				new MotorGroup(new CANTalon(RobotMap.CAN.RIGHT_MOTOR_1), new CANTalon(RobotMap.CAN.RIGHT_MOTOR_2)));
 
 		oi = new OI();
+        autonomousCommand = new MoveCollectBallsAndShoot();
+
+        SmartDashboard.putNumber("Shooting Timeout", 1);
+		SmartDashboard.putData("Shoot", new Shoot(Shooter.SHOOTING_SPEED,
+                SmartDashboard.getNumber("Shooting Timeout", 1)));
 
 	}
+
+
+
 
 	@Override
 	public void disabledInit() {
