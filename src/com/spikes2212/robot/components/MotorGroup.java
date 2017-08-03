@@ -27,9 +27,7 @@ public class MotorGroup implements SpeedController {
      */
     public MotorGroup(SpeedController... controllers) {
         this.controllers = new ArrayList<>();
-        for (int i = 0; i < controllers.length; i++) {
-        	this.controllers.add(controllers[i]);
-        }
+        this.controllers.addAll(Arrays.asList(controllers));
     }
 
     /**
