@@ -27,7 +27,9 @@ public class MotorGroup implements SpeedController {
      */
     public MotorGroup(SpeedController... controllers) {
         this.controllers = new ArrayList<>();
-        this.controllers.addAll(Arrays.asList(controllers).subList(0, controllers.length - 1));
+        for (int i = 0; i < controllers.length; i++) {
+        	this.controllers.add(controllers[i]);
+        }
     }
 
     /**
@@ -48,7 +50,7 @@ public class MotorGroup implements SpeedController {
      */
     @Override
     public void set(double speed) {
-        for (int i = 0; i < controllers.size()-1; i++) {
+        for (int i = 0; i < controllers.size(); i++) {
             controllers.get(i).set(speed);
         }
     }
@@ -60,7 +62,7 @@ public class MotorGroup implements SpeedController {
 
     @Override
     public void setInverted(boolean isInverted) {
-        for (int i = 0; i < controllers.size()-1; i++) {
+        for (int i = 0; i < controllers.size(); i++) {
             controllers.get(i).setInverted(isInverted);
         }
     }
@@ -80,7 +82,7 @@ public class MotorGroup implements SpeedController {
      */
     @Override
     public void disable() {
-        for (int i = 0; i < controllers.size()-1; i++) {
+        for (int i = 0; i < controllers.size(); i++) {
             controllers.get(i).disable();
         }
     }
@@ -91,7 +93,7 @@ public class MotorGroup implements SpeedController {
      */
     @Override
     public void stopMotor() {
-        for (int i = 0; i < controllers.size()-1; i++) {
+        for (int i = 0; i < controllers.size(); i++) {
             controllers.get(i).stopMotor();
         }
     }
@@ -104,7 +106,7 @@ public class MotorGroup implements SpeedController {
      */
     @Override
     public void pidWrite(double output) {
-        for (int i = 0; i < controllers.size()-1; i++) {
+        for (int i = 0; i < controllers.size(); i++) {
             controllers.get(i).pidWrite(output);
         }
     }

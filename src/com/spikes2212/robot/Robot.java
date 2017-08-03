@@ -1,6 +1,5 @@
 package com.spikes2212.robot;
 
-
 import com.ctre.CANTalon;
 import com.spikes2212.robot.commands.autonomous.MoveCollectBallsAndShoot;
 import com.spikes2212.robot.components.MotorGroup;
@@ -12,68 +11,60 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Scheduler;
-
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
-    public static OI oi;
+	public static OI oi;
 
+	public static Drivetrain drivetrain;
+	public static Crane crane;
+	public static Feeder feeder;
+	public static Shooter shooter;
 
-    public static Drivetrain drivetrain;
-    public static Crane crane;
-    public static Feeder feeder;
-    public static Shooter shooter;
+	private MoveCollectBallsAndShoot autonomousCommand;
 
+	@Override
+	public void robotInit() {
 
-    private MoveCollectBallsAndShoot autonomousCommand;
+		// initializing the crane subsystem
+		crane = new Crane(new VictorSP(RobotMap.PWM.CRAIN_MOTOR), new DigitalInput(RobotMap.DIO.CRAIN_UP_SWITCH),
+				new DigitalInput(RobotMap.DIO.CRAIN_DOWN_SWITCH));
 
-    @Override
-    public void robotInit() {
+		shooter = new Shooter(new VictorSP(RobotMap.PWM.SHOOTER_MOTOR));
 
+		feeder = new Feeder(new VictorSP(RobotMap.PWM.FEEDER_MOTOR));
 
-        // initializing the crane subsystem
-        crane = new Crane(new VictorSP(RobotMap.PWM.CRAIN_MOTOR),
-                new DigitalInput(RobotMap.DIO.CRAIN_UP_SWITCH), new DigitalInput(RobotMap.DIO.CRAIN_DOWN_SWITCH));
+		drivetrain = new Drivetrain(
+				new MotorGroup(new CANTalon(RobotMap.CAN.LEFT_MOTOR_1), new CANTalon(RobotMap.CAN.LEFT_MOTOR_2)),
+				new MotorGroup(new CANTalon(RobotMap.CAN.RIGHT_MOTOR_1), new CANTalon(RobotMap.CAN.RIGHT_MOTOR_2)));
 
-        shooter = new Shooter(new VictorSP(RobotMap.PWM.SHOOTER_MOTOR));
+		oi = new OI();
 
-        feeder = new Feeder(new VictorSP(RobotMap.PWM.FEEDER_MOTOR));
+	}
 
-        autonomousCommand = new MoveCollectBallsAndShoot();
+	@Override
+	public void disabledInit() {
 
-        drivetrain = new Drivetrain(new MotorGroup(new CANTalon(RobotMap.CAN.LEFT_MOTOR_1),
-                new CANTalon(RobotMap.CAN.LEFT_MOTOR_2)),
-                new MotorGroup(new CANTalon(RobotMap.CAN.RIGHT_MOTOR_1),
-                        new CANTalon(RobotMap.CAN.RIGHT_MOTOR_2)));
+	}
 
-        oi = new OI();
+	@Override
+	public void autonomousInit() {
+	}
 
-    }
+	@Override
+	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
 
-    @Override
-    public void disabledInit() {
+	}
 
-    }
+	@Override
+	public void teleopInit() {
+	}
 
-    @Override
-    public void autonomousInit() {
-        autonomousCommand.start();
-    }
+	@Override
+	public void teleopPeriodic() {
+		Scheduler.getInstance().run();
 
-    @Override
-    public void autonomousPeriodic(){
-        Scheduler.getInstance().run();
-    }
-
-
-    @Override
-    public void teleopInit() {
-        autonomousCommand.cancel();
-    }
-
-    @Override
-    public void teleopPeriodic() {
-        Scheduler.getInstance().run();
-    }
+	}
 }

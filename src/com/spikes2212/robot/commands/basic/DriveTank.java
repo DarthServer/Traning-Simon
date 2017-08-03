@@ -2,6 +2,7 @@ package com.spikes2212.robot.commands.basic;
 
 import com.spikes2212.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.function.Supplier;
 
@@ -26,7 +27,7 @@ public class DriveTank extends Command {
 
     @Override
     protected void execute() {
-
+		SmartDashboard.putNumber("right y", Robot.oi.getLeftY());
         Robot.drivetrain.driveTank(leftSpeedSupplier.get(), rightSpeedSupplier.get());
     }
 
