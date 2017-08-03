@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Spikes-Lib">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Programing/FRC/Spikes-Lib/classes/artifacts/Spikes_Lib_jar/SLSystemSuit.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Programing/FRC/Spikes-Lib/classes/artifacts/Spikes_Lib_jar/SLSystemSuit.jar!/" />
+    </SOURCES>
+  </library>
+</component>
